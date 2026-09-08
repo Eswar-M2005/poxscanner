@@ -1,0 +1,26 @@
+{
+  "model": "resnet50",
+  "split": "test",
+  "version": "0.1.0",
+  "n_samples": 270,
+  "accuracy": 0.8666666666666667,
+  "precision": 0.6290322580645161,
+  "recall": 0.75,
+  "sensitivity": 0.75,
+  "specificity": 0.8944954128440367,
+  "f1": 0.6842105263157895,
+  "roc_auc": 0.9197247706422018,
+  "pr_auc": 0.6376031847045245,
+  "latency_ms_p50": 5.775580750196241,
+  "confusion_matrix": [
+    [
+      195,
+      23
+    ],
+    [
+      13,
+      39
+    ]
+  ],
+  "notes": "Evaluated checkpoint resnet50_best.pt on split=test."
+}

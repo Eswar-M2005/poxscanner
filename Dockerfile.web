@@ -1,0 +1,43 @@
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY client/package.json client/package-lock.json* client/pnpm-lock.yaml* client/yarn.lock* ./
+RUN if [ -f package-lock.json ]; then npm ci; \
+    elif [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable && pnpm install --frozen-lockfile; \
+    else npm install; fi
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+    NEXT_TELEMETRY_DISABLED=1
+COPY --from=deps /app/node_modules ./node_modules
+COPY client/ .
+RUN npm run build \
+    && mkdir -p /out \
+    && if [ -f .next/standalone/server.js ]; then \
+         cp -a .next/standalone/. /out/ \
+         && mkdir -p /out/.next \
+         && cp -a .next/static /out/.next/static \
+         && if [ -d public ]; then cp -a public /out/public; fi \
+         && echo standalone > /out/.runtime; \
+       else \
+         cp -a . /out/ \
+         && echo next-start > /out/.runtime; \
+       fi
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ARG NEXT_PUBLIC_API_URL=http://localhost:8000
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+    NODE_ENV=production \
+    NEXT_TELEMETRY_DISABLED=1 \
+    PORT=3000 \
+    HOSTNAME=0.0.0.0
+
+COPY --from=builder /out ./
+
+EXPOSE 3000
+
+# Prefer Next.js standalone (`output: 'standalone'` in next.config); else `next start`.
+CMD ["sh", "-c", "if [ -f server.js ] && [ \"$(cat .runtime 2>/dev/null)\" = standalone ]; then node server.js; else npx next start -H 0.0.0.0 -p 3000; fi"]

@@ -1,0 +1,26 @@
+{
+  "model": "mobilenet_v3_small",
+  "split": "train",
+  "version": "0.1.0",
+  "n_samples": 6374,
+  "accuracy": 0.9328522121117038,
+  "precision": 0.9131474103585657,
+  "recall": 0.9160671462829736,
+  "sensitivity": 0.9160671462829736,
+  "specificity": 0.943698347107438,
+  "f1": 0.9146049481245012,
+  "roc_auc": 0.9835603624538385,
+  "pr_auc": 0.9757203283939274,
+  "latency_ms_p50": null,
+  "confusion_matrix": [
+    [
+      3654,
+      218
+    ],
+    [
+      210,
+      2292
+    ]
+  ],
+  "notes": "Two-phase transfer learning. Best epoch 3 val_recall_monkeypox=0.9038."
+}

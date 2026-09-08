@@ -1,0 +1,26 @@
+{
+  "model": "resnet50",
+  "split": "train",
+  "version": "0.1.0",
+  "n_samples": 6374,
+  "accuracy": 0.9847819265767179,
+  "precision": 0.9781312127236581,
+  "recall": 0.9832134292565947,
+  "sensitivity": 0.9832134292565947,
+  "specificity": 0.9857954545454546,
+  "f1": 0.9806657364959139,
+  "roc_auc": 0.9987996689425319,
+  "pr_auc": 0.9981024084870713,
+  "latency_ms_p50": null,
+  "confusion_matrix": [
+    [
+      3817,
+      55
+    ],
+    [
+      42,
+      2460
+    ]
+  ],
+  "notes": "Two-phase transfer learning. Best epoch 7 val_recall_monkeypox=0.7885."
+}

@@ -1,0 +1,64 @@
+{
+  "status": "selected",
+  "selected_model": "resnet50",
+  "checkpoint": "ml/artifacts/checkpoints/selected.pt",
+  "reason": "Ranked by monkeypox recall/sensitivity, then F1, ROC-AUC, PR-AUC, specificity, |val\u2212test| F1 gap, and inference latency.",
+  "ranking": [
+    {
+      "model": "resnet50",
+      "recall": 0.75,
+      "sensitivity": 0.75,
+      "f1": 0.6842105263157895,
+      "roc_auc": 0.9197247706422018,
+      "pr_auc": 0.6376031847045245,
+      "specificity": 0.8944954128440367,
+      "accuracy": 0.8666666666666667,
+      "latency_ms_p50": 5.775580750196241,
+      "f1_val_test_gap": 0.11190597853857942,
+      "n_samples": 270,
+      "metrics_file": "/Users/neosoft/Desktop/poxscanner/ml/artifacts/metrics/resnet50_test.json"
+    },
+    {
+      "model": "densenet121",
+      "recall": 0.75,
+      "sensitivity": 0.75,
+      "f1": 0.6190476190476191,
+      "roc_auc": 0.8596506704304869,
+      "pr_auc": 0.5746245052504587,
+      "specificity": 0.8394495412844036,
+      "accuracy": 0.8222222222222222,
+      "latency_ms_p50": 6.88928907038644,
+      "f1_val_test_gap": 0.1385281385281385,
+      "n_samples": 270,
+      "metrics_file": "/Users/neosoft/Desktop/poxscanner/ml/artifacts/metrics/densenet121_test.json"
+    },
+    {
+      "model": "efficientnet_b0",
+      "recall": 0.5961538461538461,
+      "sensitivity": 0.5961538461538461,
+      "f1": 0.5535714285714286,
+      "roc_auc": 0.8652964008468595,
+      "pr_auc": 0.5348036885982193,
+      "specificity": 0.8669724770642202,
+      "accuracy": 0.8148148148148148,
+      "latency_ms_p50": 50.97013282647822,
+      "f1_val_test_gap": 0.2321428571428571,
+      "n_samples": 270,
+      "metrics_file": "/Users/neosoft/Desktop/poxscanner/ml/artifacts/metrics/efficientnet_b0_test.json"
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "recall": 0.4423076923076923,
+      "sensitivity": 0.4423076923076923,
+      "f1": 0.4842105263157895,
+      "roc_auc": 0.8168666196189132,
+      "pr_auc": 0.4235621917525805,
+      "specificity": 0.908256880733945,
+      "accuracy": 0.8185185185185185,
+      "latency_ms_p50": 2.0419687498360872,
+      "f1_val_test_gap": 0.34035087719298246,
+      "n_samples": 270,
+      "metrics_file": "/Users/neosoft/Desktop/poxscanner/ml/artifacts/metrics/mobilenet_v3_small_test.json"
+    }
+  ]
+}

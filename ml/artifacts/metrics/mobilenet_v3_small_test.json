@@ -1,0 +1,26 @@
+{
+  "model": "mobilenet_v3_small",
+  "split": "test",
+  "version": "0.1.0",
+  "n_samples": 270,
+  "accuracy": 0.8185185185185185,
+  "precision": 0.5348837209302325,
+  "recall": 0.4423076923076923,
+  "sensitivity": 0.4423076923076923,
+  "specificity": 0.908256880733945,
+  "f1": 0.4842105263157895,
+  "roc_auc": 0.8168666196189132,
+  "pr_auc": 0.4235621917525805,
+  "latency_ms_p50": 2.0419687498360872,
+  "confusion_matrix": [
+    [
+      198,
+      20
+    ],
+    [
+      29,
+      23
+    ]
+  ],
+  "notes": "Evaluated checkpoint mobilenet_v3_small_best.pt on split=test."
+}

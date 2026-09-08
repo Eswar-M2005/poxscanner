@@ -1,0 +1,26 @@
+{
+  "model": "efficientnet_b0",
+  "split": "train",
+  "version": "0.1.0",
+  "n_samples": 6374,
+  "accuracy": 0.9314402259177911,
+  "precision": 0.9138276553106213,
+  "recall": 0.9112709832134293,
+  "sensitivity": 0.9112709832134293,
+  "specificity": 0.9444731404958677,
+  "f1": 0.9125475285171103,
+  "roc_auc": 0.9807934644020321,
+  "pr_auc": 0.9725264352173423,
+  "latency_ms_p50": null,
+  "confusion_matrix": [
+    [
+      3657,
+      215
+    ],
+    [
+      222,
+      2280
+    ]
+  ],
+  "notes": "Two-phase transfer learning. Best epoch 4 val_recall_monkeypox=0.8462."
+}

@@ -1,0 +1,26 @@
+{
+  "model": "densenet121",
+  "split": "train",
+  "version": "0.1.0",
+  "n_samples": 6374,
+  "accuracy": 0.9577973015374961,
+  "precision": 0.94749498997996,
+  "recall": 0.9448441247002398,
+  "sensitivity": 0.9448441247002398,
+  "specificity": 0.9661673553719008,
+  "f1": 0.9461677006203723,
+  "roc_auc": 0.9912756778048635,
+  "pr_auc": 0.9879366128674366,
+  "latency_ms_p50": null,
+  "confusion_matrix": [
+    [
+      3741,
+      131
+    ],
+    [
+      138,
+      2364
+    ]
+  ],
+  "notes": "Two-phase transfer learning. Best epoch 5 val_recall_monkeypox=0.9615."
+}

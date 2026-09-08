@@ -1,0 +1,26 @@
+{
+  "model": "multimodal_resnet50",
+  "split": "test",
+  "version": "0.1.0",
+  "n_samples": 270,
+  "accuracy": 0.9037037037037037,
+  "precision": 0.75,
+  "recall": 0.75,
+  "sensitivity": 0.75,
+  "specificity": 0.9403669724770642,
+  "f1": 0.75,
+  "roc_auc": 0.936044460127029,
+  "pr_auc": 0.6219392030791929,
+  "latency_ms_p50": null,
+  "confusion_matrix": [
+    [
+      205,
+      13
+    ],
+    [
+      13,
+      39
+    ]
+  ],
+  "notes": ""
+}

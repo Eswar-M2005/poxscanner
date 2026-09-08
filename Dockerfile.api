@@ -1,0 +1,34 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/app:/app/server \
+    PIP_DISABLE_PIP_VERSION_CHECK=1 \
+    PIP_NO_CACHE_DIR=1
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# CPU wheels keep the image much smaller than default CUDA PyTorch builds.
+# extra-index-url still applies if server/requirements.txt pins torch.
+COPY server/requirements.txt /app/server/requirements.txt
+RUN python -m pip install --upgrade pip \
+    && python -m pip install torch torchvision \
+        --index-url https://download.pytorch.org/whl/cpu \
+    && python -m pip install -r /app/server/requirements.txt \
+        --extra-index-url https://download.pytorch.org/whl/cpu
+
+COPY server/ /app/server/
+COPY ml/ /app/ml/
+
+WORKDIR /app/server
+
+EXPOSE 8000
+
+HEALTHCHECK --interval=30s --timeout=8s --start-period=25s --retries=3 \
+    CMD curl -fsS http://127.0.0.1:8000/health || exit 1
+
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]

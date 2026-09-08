@@ -1,0 +1,45 @@
+{
+  "counts_by_split": {
+    "test": {
+      "monkeypox": 52,
+      "non_monkeypox": 218
+    },
+    "train": {
+      "monkeypox": 2502,
+      "non_monkeypox": 3872
+    },
+    "val": {
+      "monkeypox": 52,
+      "non_monkeypox": 220
+    }
+  },
+  "csv_columns": [
+    "path",
+    "label",
+    "split",
+    "sha256",
+    "width",
+    "height",
+    "group_id"
+  ],
+  "group_id_sources": {
+    "filename": 7518
+  },
+  "n_corrupt_skipped": 0,
+  "n_enumerated": 7518,
+  "n_exact_duplicates_removed": 602,
+  "n_groups": 127,
+  "n_kept": 6916,
+  "n_test": 270,
+  "n_train": 6374,
+  "n_val": 272,
+  "ratios": {
+    "test": 0.15,
+    "train": 0.7,
+    "val": 0.15
+  },
+  "seed": 42,
+  "status": "ok",
+  "used_metadata_csv": false,
+  "used_near_duplicates": true
+}
