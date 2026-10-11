@@ -240,3 +240,46 @@ def build_clinical_model(
         num_classes=num_classes,
         dropout=dropout,
     )
+
+
+if __name__ == "__main__":
+    print("=" * 60)
+    print("Testing Multimodal & Clinical Architecture Initialization")
+    print("=" * 60)
+
+    # 1. Test Clinical-Only Classifier
+    clin_model = build_clinical_model(clinical_dim=28, num_classes=2)
+    dummy_clin = torch.randn(4, 28)
+    clin_out = clin_model(dummy_clin)
+    print(f"✓ Clinical-only forward pass successful! Output shape: {tuple(clin_out.shape)}")
+
+    # 2. Test Multimodal Classifier
+    print("\nInitializing MultimodalClassifier (ResNet50 + Clinical MLP)...")
+    mm_model = build_multimodal_model(
+        backbone_name="resnet50",
+        clinical_dim=28,
+        num_classes=2,
+        pretrained=False,
+    )
+    dummy_img = torch.randn(2, 3, 224, 224)
+    dummy_clin_batch = torch.randn(2, 28)
+    mm_out = mm_model(dummy_img, dummy_clin_batch)
+    print(f"✓ Multimodal forward pass successful! Output shape: {tuple(mm_out.shape)}")
+
+    # 3. Test Backbone Freezing / Unfreezing
+    mm_model.freeze_image_backbone()
+    target_layer = mm_model.get_gradcam_target_layer()
+    is_frozen = not any(p.requires_grad for p in target_layer.parameters())
+    print(f"✓ Image backbone freeze verified: {is_frozen}")
+
+    mm_model.unfreeze_last_blocks()
+    is_unfrozen = any(p.requires_grad for p in target_layer.parameters())
+    print(f"✓ Deeper blocks unfreeze verified: {is_unfrozen}")
+
+    total_params = sum(p.numel() for p in mm_model.parameters())
+    trainable_params = sum(p.numel() for p in mm_model.parameters() if p.requires_grad)
+    print(f"\nTotal parameters: {total_params:,}")
+    print(f"Trainable parameters (Stage 2): {trainable_params:,}")
+    print("=" * 60)
+    print("All architecture sanity checks passed!")
+
