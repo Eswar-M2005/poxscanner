@@ -1,0 +1,34 @@
+services:
+  # ==========================================
+  # 1. FastAPI Backend API
+  # ==========================================
+  - type: web
+    name: poxscanner-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile.api
+    dockerContext: .
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: CORS_ORIGINS
+        value: "*"
+      - key: DEMO_MODE
+        value: "auto"
+      - key: PYTHONPATH
+        value: "/app:/app/server"
+
+  # ==========================================
+  # 2. Next.js Frontend Client
+  # ==========================================
+  - type: web
+    name: poxscanner-web
+    runtime: node
+    rootDir: client
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NEXT_PUBLIC_API_BASE_URL
+        value: "https://poxscanner-api.onrender.com"
